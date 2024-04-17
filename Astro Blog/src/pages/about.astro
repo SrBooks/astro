@@ -1,4 +1,12 @@
 ---
+import '../styles/global.css';
+
+//Const Styles
+const skinCollor = "#32c697";
+const fontWeight = "bold";
+const textCase = "uppercase";
+
+//Const Info
 const pageTitle = "About me";
 
 const identity = {
@@ -22,6 +30,24 @@ const goal = 3;
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
+        <style
+            define:vars={{skinCollor, fontWeight, textCase}}
+        >
+            :root{
+                color-scheme: light dark;
+            }
+
+            h1 {
+              color: purple;
+              font-size: 4rem;
+            }
+            .skill {
+                
+                color: var(--skinCollor);
+                font-weight: var(--fontWeight);
+                text-transform: var(--textCase);
+            }
+          </style>
     </head>
 
     <body>
@@ -60,7 +86,7 @@ const goal = 3;
         </ul>
         <p>My skills are:</p>
         <ul>
-            {skills.map((skill) => <li>{skill}</li>)}
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
         </ul>
         <p>Mi hobbies are:</p>
         <ul>
