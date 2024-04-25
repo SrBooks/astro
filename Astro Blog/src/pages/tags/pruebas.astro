@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const pageTitle = "Tags - Astro";
+const allPosts = await Astro.glob("../posts/*.md");
+const uniqueTags = [... new Set(allPosts.map( (post) => post.frontmatter.tags).flat())];
+const titles = [... allPosts.map( (post) => post.frontmatter.title).flat()];
+
+const tags = [
+    "astro",
+    "bloguear",
+    "aprender en público",
+    "éxitos",
+    "contratiempos",
+    "comunidad",
+    "comunidad",
+    "bloguear",
+];
+
+const uniqueTags1 = tags.filter( (item, index) => {
+    return tags.indexOf(item) === index;
+})
+
+const uniqueTagsSet2 = new Set(tags);
+const arrUniqueTagsSet2 = Array.from(uniqueTagsSet2);
+
+const uniqueTags3 = [... new Set(tags)];
+uniqueTags3.push('Actualidad', 'Seguridad');
+
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    <h1>{pageTitle}</h1>
+    <p>Unique Tags 1 - Filter</p>
+    <ul>
+        {uniqueTags1.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <p>Unique Tags 2 - Set</p>
+    <ul>
+        {uniqueTags3.map((tag) => <li>{tag}</li>)}
+    </ul>
+    <p>All Posts - Tags dynamic</p>
+    <ul>
+        {uniqueTags.map( (tag) => <li>{tag}</li> )}
+    </ul>
+    <p>All Posts - Titles</p>
+    <ul>
+        {titles.map( (title) => <li>{title}</li> )}
+    </ul>
+</BaseLayout>

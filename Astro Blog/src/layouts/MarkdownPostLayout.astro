@@ -1,6 +1,9 @@
 ---
-const { frontmatter } = Astro.props;
 import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+// const allPosts = await Astro.glob("../pages/posts/*.md");
+// const tags = [... new Set(allPosts.map( (post) => post.frontmatter.tags).flat())];
 ---
 
 <style>
@@ -16,6 +19,31 @@ import BaseLayout from "./BaseLayout.astro";
         font-size: 10px;
         justify-content: space-around;
     }
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+  
+    .tag {
+      margin: 0.25em;
+      border-radius: .5em;
+      padding: .5em 1em;
+      font-size: 12px;
+      text-transform: uppercase;
+      background-color: #8e5ed6;
+    }
+
+    .tag:hover {
+      
+      background-color: #b889ff;
+      transition: 0.5s all ease;
+    }
 </style>
 <BaseLayout pageTitle={frontmatter.title}>
     <section class="info-post">
@@ -25,6 +53,13 @@ import BaseLayout from "./BaseLayout.astro";
     </section>
     <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
     <h1>{frontmatter.title}</h1>
+
+    <div class="tags">
+        {frontmatter.tags.map((tag) => (
+          <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
+        ))}
+    </div>
+
     <slot />
 </BaseLayout>
 
